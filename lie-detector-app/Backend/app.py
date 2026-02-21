@@ -6,6 +6,7 @@ import cv2
 import numpy as np
 import os
 from analyzer import StressAnalyzer
+import sys
 
 CWD = os.path.dirname(os.path.abspath(__file__))
 FRONTEND_DIR = os.path.normpath(os.path.join(CWD, '..', 'Frontend'))
@@ -91,9 +92,14 @@ def handle_video_frame(data):
         emit('analysis_result', {"error": str(e)})
 
 if __name__ == '__main__':
+    # Get port from environment or default to 5000
+    port = int(os.environ.get('PORT', 5000))
+    debug_mode = os.environ.get('FLASK_ENV') == 'development'
+    
     print('='*60)
     print(' Lie Detector Backend Starting')
     print(f' Serving frontend from: {FRONTEND_DIR}')
-    print(f' API running on: http://127.0.0.1:5000')
+    print(f' API running on: http://0.0.0.0:{port}')
+    print(f' Debug mode: {debug_mode}')
     print('='*60)
-    socketio.run(app, debug=True, port=5000, host='127.0.0.1')
+    socketio.run(app, debug=debug_mode, port=port, host='0.0.0.0', allow_unsafe_werkzeug=True)

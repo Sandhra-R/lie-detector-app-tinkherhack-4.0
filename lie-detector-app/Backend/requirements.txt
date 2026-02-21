@@ -8,3 +8,5 @@ numpy
 scipy
 python-socketio
 eventlet
+gunicorn
+python-dotenv
