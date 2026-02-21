@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truth AI - Lie Detector</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🤖 Truth AI</h1>
+            <p>Advanced Stress Analysis System</p>
+            <div id="demoBanner" style="display:none; background:#ffa502; color:#000; border-radius:8px; padding:8px 16px; margin-top:10px; font-weight:bold; font-size:0.9rem;">
+                ⚠️ DEMO MODE — MediaPipe unavailable (Python 3.14 not supported). Showing simulated data. Install Python 3.10/3.11 + mediapipe==0.10.0 for real detection.
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="video-section">
+                <div class="video-container">
+                    <video id="video" autoplay playsinline></video>
+                    <canvas id="canvas"></canvas>
+                </div>
+                <div class="controls">
+                    <button id="startBtn" class="btn start">Start Analysis</button>
+                    <button id="stopBtn" class="btn stop" disabled>Stop</button>
+                    <button id="resetBtn" class="btn reset">Reset</button>
+                </div>
+            </div>
+
+            <div class="metrics-section">
+                <div class="metric-card">
+                    <h3>👁️ Blink Rate</h3>
+                    <div class="value" id="blinkCount">0</div>
+                    <div class="label">blinks detected</div>
+                </div>
+                
+                <div class="metric-card">
+                    <h3>👀 Eye Aspect Ratio</h3>
+                    <div class="value" id="earValue">0.00</div>
+                    <div class="label">normal: 0.25-0.30</div>
+                </div>
+
+                <div class="metric-card">
+                    <h3>🎤 Voice Pitch</h3>
+                    <div class="value" id="pitchValue">--</div>
+                    <div class="label">Hz (Hertz)</div>
+                </div>
+
+                <div class="metric-card">
+                    <h3>🧾 Truth Indicator</h3>
+                    <div class="value" id="truthIndicator">--</div>
+                    <div class="label">likelihood (0-1)</div>
+                </div>
+
+                <div class="metric-card">
+                    <h3>😮 Expression</h3>
+                    <div class="value" id="expressionValue">--</div>
+                    <div class="label">facial expression detected</div>
+                </div>
+
+                <div class="metric-card">
+                    <h3>👁️‍🗨️ Gaze</h3>
+                    <div class="value" id="gazeValue">--</div>
+                    <div class="label">eye direction shift</div>
+                </div>
+
+                <div class="result-card">
+                    <h3>📊 Stress Level</h3>
+                    <div class="stress-indicator" id="stressLevel">Ready</div>
+                    <div class="progress-bar">
+                        <div class="progress" id="stressProgress"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="audio-section">
+            <h3>🎙️ Voice Analysis</h3>
+            <button id="recordAudio" class="btn record">Hold to Record Voice</button>
+            <audio id="audioPlayback" controls></audio>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
